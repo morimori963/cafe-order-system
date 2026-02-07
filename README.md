@@ -1,123 +1,273 @@
-# Cafe Order System
+<div align="center">
 
-カフェのオンライン注文システム
+# ☕ Cafe Order System
 
-## 機能
+**モダンなカフェ向けセルフオーダーシステム**
 
-- メニュー表示（カテゴリ別）
-- カート機能（LocalStorage永続化）
-- Stripe決済
-- リアルタイム注文管理（店舗用）
-- メール・LINE通知
-- PWA対応
+*A modern self-ordering system for cafes*
 
-## 技術スタック
+<br>
 
-- **フロントエンド**: Next.js 15 + TypeScript + Tailwind CSS
-- **バックエンド**: Supabase (PostgreSQL + Auth + Realtime)
-- **決済**: Stripe Checkout
-- **通知**: Resend (メール) + LINE Messaging API
+[![Next.js](https://img.shields.io/badge/Next.js_15-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Supabase](https://img.shields.io/badge/Supabase-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Stripe](https://img.shields.io/badge/Stripe-635BFF?style=for-the-badge&logo=stripe&logoColor=white)](https://stripe.com/)
 
-## セットアップ
+<br>
 
-### 1. 依存関係のインストール
+![Menu Screen](docs/screenshots/cafe-menu.png)
+
+</div>
+
+---
+
+## Overview | 概要
+
+カフェ向けの**モバイルファースト・セルフオーダーシステム**です。
+
+お客様はスマートフォンからQRコードを読み取り、メニューの閲覧から注文・決済までをスムーズに完了できます。店舗スタッフは管理画面でリアルタイムに注文を確認し、効率的なオペレーションを実現します。
+
+<div align="center">
+
+![Order Flow](docs/screenshots/cafe-order.png)
+
+*注文から受け取りまでシームレスな体験*
+
+</div>
+
+---
+
+## Features | 機能
+
+<table>
+<tr>
+<td width="50%">
+
+### 📱 お客様向け機能
+- **メニュー閲覧**: 写真付きの見やすいメニュー
+- **カート機能**: 商品の追加・削除・数量変更
+- **温度選択**: ホット/アイスの選択対応
+- **オンライン決済**: Stripe連携
+- **注文追跡**: リアルタイムでステータス確認
+
+</td>
+<td width="50%">
+
+### 🖥️ 管理者向け機能
+- **注文管理**: リアルタイム注文一覧
+- **ステータス更新**: 調理中→完了の管理
+- **メニュー管理**: 商品のCRUD操作
+- **売上サマリー**: 日次売上・注文数表示
+- **在庫管理**: 売り切れ設定
+
+</td>
+</tr>
+</table>
+
+<div align="center">
+
+![Admin Dashboard](docs/screenshots/cafe-admin.png)
+
+*管理画面で注文をリアルタイム管理*
+
+</div>
+
+---
+
+## Tech Stack | 技術スタック
+
+| Category | Technology |
+|----------|------------|
+| **Framework** | Next.js 15 (App Router) |
+| **Language** | TypeScript |
+| **Styling** | Tailwind CSS, shadcn/ui |
+| **Database** | Supabase (PostgreSQL) |
+| **Authentication** | Supabase Auth |
+| **Payment** | Stripe |
+| **Notification** | LINE Messaging API, Resend |
+| **Deployment** | Vercel |
+
+---
+
+## Architecture | アーキテクチャ
+
+```
+┌─────────────────┐     ┌─────────────────┐
+│   Customer App  │     │   Admin Panel   │
+│   (Mobile Web)  │     │   (Desktop)     │
+└────────┬────────┘     └────────┬────────┘
+         │                       │
+         └───────────┬───────────┘
+                     │
+              ┌──────▼──────┐
+              │  Next.js    │
+              │  API Routes │
+              └──────┬──────┘
+                     │
+         ┌───────────┼───────────┐
+         │           │           │
+   ┌─────▼─────┐ ┌───▼───┐ ┌────▼────┐
+   │ Supabase  │ │Stripe │ │  LINE   │
+   │ Database  │ │Payment│ │  Notify │
+   └───────────┘ └───────┘ └─────────┘
+```
+
+---
+
+## Development Process | 開発プロセス
+
+<div align="center">
+
+### 🤖 AI-Powered Development
+
+</div>
+
+本プロジェクトは、**AIエージェント（Claude Code）を開発パートナーとして活用**し、設計から実装までを迅速かつ高品質に実現しました。
+
+- **要件定義**: 自然言語での対話を通じてシステム仕様を策定
+- **フルスタック実装**: フロントエンド・バックエンド・決済連携まで一貫して開発
+- **UI/UXデザイン**: モバイルファーストの直感的なインターフェース設計
+- **リアルタイム機能**: Supabaseを活用したリアルタイム注文更新
+
+> AIとの協業により、従来数週間かかる開発を大幅に短縮し、高い生産性と品質を両立しました。
+
+---
+
+## Screenshots | スクリーンショット
+
+<details>
+<summary>クリックで展開</summary>
+
+### メニュー画面
+![Menu](docs/screenshots/cafe-menu.png)
+
+### カート画面
+![Cart](docs/screenshots/cafe-cart.png)
+
+### 注文確認画面
+![Order](docs/screenshots/cafe-order.png)
+
+### 管理画面
+![Admin](docs/screenshots/cafe-admin.png)
+
+</details>
+
+---
+
+## Getting Started | セットアップ
+
+### Prerequisites | 前提条件
+
+- Node.js 18+
+- Supabase アカウント
+- Stripe アカウント（決済機能を使用する場合）
+
+### Installation | インストール
 
 ```bash
+# Clone the repository
+git clone https://github.com/morimori963/cafe-order-system.git
 cd cafe-order-system
+
+# Install dependencies
 npm install
-```
 
-### 2. 環境変数の設定
-
-`.env.example`をコピーして`.env.local`を作成:
-
-```bash
+# Setup environment variables
 cp .env.example .env.local
+# Edit .env.local with your Supabase and Stripe keys
+
+# Start development server
+npm run dev
 ```
 
-各環境変数を設定:
+### Environment Variables | 環境変数
 
 ```env
 # Supabase
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 
 # Stripe
-STRIPE_SECRET_KEY=sk_test_xxx
-STRIPE_WEBHOOK_SECRET=whsec_xxx
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_xxx
+STRIPE_SECRET_KEY=your_stripe_secret
+STRIPE_WEBHOOK_SECRET=your_webhook_secret
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable
 
 # LINE Messaging API
-LINE_CHANNEL_ACCESS_TOKEN=your-line-channel-access-token
-LINE_CHANNEL_SECRET=your-line-channel-secret
+LINE_CHANNEL_ACCESS_TOKEN=your_line_token
+LINE_CHANNEL_SECRET=your_line_secret
 
 # Email (Resend)
-RESEND_API_KEY=re_xxx
+RESEND_API_KEY=your_resend_key
 
 # App
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
-### 3. Supabaseデータベースセットアップ
+### Access | アクセス
 
-1. [Supabase](https://supabase.com)でプロジェクトを作成
-2. SQL Editorで`supabase/migrations/001_initial_schema.sql`を実行
-3. Realtimeを有効化（ordersテーブル）
+| Page | URL |
+|------|-----|
+| Customer Menu | http://localhost:3000 |
+| Admin Dashboard | http://localhost:3000/admin |
+| Menu Management | http://localhost:3000/admin/menu |
 
-### 4. Stripe設定
+---
 
-1. [Stripe Dashboard](https://dashboard.stripe.com)でアカウント作成
-2. テストモードのAPIキーを取得
-3. Webhookを設定（`/api/webhook/stripe`）
-   - イベント: `checkout.session.completed`
+## Project Structure | プロジェクト構成
 
-### 5. 開発サーバー起動
-
-```bash
-npm run dev
+```
+cafe-order-system/
+├── src/
+│   ├── app/
+│   │   ├── (customer)/      # Customer pages
+│   │   │   ├── cart/        # Shopping cart
+│   │   │   ├── checkout/    # Checkout flow
+│   │   │   └── orders/      # Order tracking
+│   │   ├── (admin)/         # Admin pages
+│   │   │   └── admin/       # Dashboard & menu management
+│   │   └── api/             # API routes
+│   │       ├── checkout/    # Stripe checkout
+│   │       ├── orders/      # Order management
+│   │       └── webhook/     # Stripe webhooks
+│   ├── components/          # React components
+│   │   ├── ui/              # shadcn/ui components
+│   │   └── admin/           # Admin-specific components
+│   ├── lib/                 # Utilities & configs
+│   └── types/               # TypeScript types
+├── public/                  # Static assets
+├── supabase/               # Database migrations
+└── docs/screenshots/       # README images
 ```
 
-http://localhost:3000 でアクセス
+---
 
-## ページ構成
-
-### 顧客向け
-- `/` - メニュー一覧
-- `/cart` - カート
-- `/checkout` - 注文確定
-- `/orders/[id]` - 注文状況
-
-### 管理画面
-- `/admin` - 注文管理（リアルタイム更新）
-- `/admin/menu` - メニュー管理
-- `/admin/login` - 管理者ログイン
-
-## 管理者アカウント作成
-
-1. Supabase Dashboardで認証 > ユーザーを追加
-2. adminsテーブルにレコードを追加:
+## Database Schema | データベース
 
 ```sql
-INSERT INTO admins (id, email, name) VALUES
-  ('ユーザーUID', 'admin@example.com', '管理者名');
+-- Menu Items
+menu_items (id, name, description, price, image_url, has_temperature, is_available, sort_order)
+
+-- Orders
+orders (id, order_number, customer_name, total_amount, status, created_at)
+
+-- Order Items
+order_items (id, order_id, menu_item_id, quantity, temperature, price)
 ```
 
-## PWA設定
+---
 
-アイコン画像を配置:
-- `public/icons/icon-192.png` (192x192)
-- `public/icons/icon-512.png` (512x512)
+## License | ライセンス
 
-## デプロイ
+MIT License
 
-### Vercel
+---
 
-1. GitHubにプッシュ
-2. Vercelでインポート
-3. 環境変数を設定
-4. Stripe WebhookのURLを更新
+<div align="center">
 
-```bash
-vercel --prod
-```
+**Built with ☕ and 🤖**
+
+*AI-Powered Cafe Solution*
+
+</div>
