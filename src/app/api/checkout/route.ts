@@ -119,12 +119,12 @@ export async function POST(request: NextRequest) {
       .insert(orderItems);
 
     if (itemsError) {
-      console.error("Order items creation error:", itemsError);
+      console.error("Order items creation error:", JSON.stringify(itemsError));
       console.error("Order items data:", JSON.stringify(orderItems));
       // 注文を削除
       await supabase.from("orders").delete().eq("id", order.id);
       return NextResponse.json(
-        { error: `注文明細の作成に失敗しました: ${itemsError.message}` },
+        { error: `注文明細の作成に失敗しました: ${itemsError.message || itemsError.code || JSON.stringify(itemsError)}` },
         { status: 500 }
       );
     }
