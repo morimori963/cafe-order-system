@@ -14,6 +14,13 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Stripe](https://img.shields.io/badge/Stripe-635BFF?style=for-the-badge&logo=stripe&logoColor=white)](https://stripe.com/)
 
+[![Stripe Test Payment](https://img.shields.io/badge/Stripe_Test_Payment-Verified-success?style=for-the-badge)](https://stripe.com/)
+[![Deploy](https://img.shields.io/badge/Deploy-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/)
+
+<br>
+
+### [Live Demo](https://cafe-order-system-moris-projects-556980db.vercel.app/)
+
 <br>
 
 ![Menu Screen](docs/screenshots/cafe-menu.png)
@@ -48,7 +55,7 @@
 - **メニュー閲覧**: 写真付きの見やすいメニュー
 - **カート機能**: 商品の追加・削除・数量変更
 - **温度選択**: ホット/アイスの選択対応
-- **オンライン決済**: Stripe連携
+- **オンライン決済**: Stripe Checkout連携（テスト決済動作確認済み）
 - **注文追跡**: リアルタイムでステータス確認
 
 </td>
