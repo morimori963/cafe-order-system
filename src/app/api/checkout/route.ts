@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getStripe } from "@/lib/stripe";
-import { createClient } from "@/lib/supabase/server";
+import { createServiceClient } from "@/lib/supabase/server";
 import { generateOrderNumber } from "@/lib/utils";
 import type { SelectedOption } from "@/types";
 
@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const supabase = await createClient();
+    const supabase = await createServiceClient();
     const orderNumber = generateOrderNumber();
 
     // 受取時間を計算
