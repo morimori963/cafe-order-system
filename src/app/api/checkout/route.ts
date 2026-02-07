@@ -42,6 +42,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    if (!process.env.NEXT_PUBLIC_APP_URL) {
+      console.error("NEXT_PUBLIC_APP_URL is not set");
+      return NextResponse.json(
+        { error: "サーバー設定エラー: アプリURLが未設定です" },
+        { status: 500 }
+      );
+    }
+
     const body: CheckoutRequest = await request.json();
     const {
       items,
@@ -183,8 +191,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ url: session.url });
   } catch (error) {
     console.error("Checkout error:", error);
+    const errorMessage = error instanceof Error ? error.message : "不明なエラー";
     return NextResponse.json(
-      { error: "決済処理中にエラーが発生しました" },
+      { error: `決済処理中にエラーが発生しました: ${errorMessage}` },
       { status: 500 }
     );
   }
