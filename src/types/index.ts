@@ -12,6 +12,11 @@ export type MenuItem = {
 
 export type Temperature = "hot" | "ice";
 
+export type SelectedOption = {
+  name: string;
+  price?: number;
+};
+
 export type OrderStatus = "pending" | "confirmed" | "preparing" | "ready" | "completed" | "cancelled";
 
 export type Order = {
@@ -20,10 +25,12 @@ export type Order = {
   customer_name: string;
   customer_email: string | null;
   customer_phone: string | null;
+  customer_line_id: string | null;
   status: OrderStatus;
   total_amount: number;
   notes: string | null;
   pickup_time: string | null;
+  stripe_payment_intent_id: string | null;
   created_at: string;
   updated_at: string;
   items?: OrderItem[];
@@ -37,7 +44,9 @@ export type OrderItem = {
   quantity: number;
   unit_price: number;
   temperature: Temperature | null;
+  options?: { name: string }[] | null;
   created_at: string;
+  menu_item?: MenuItem;
 };
 
 export type CartItem = {
