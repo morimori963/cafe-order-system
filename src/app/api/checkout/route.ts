@@ -105,10 +105,22 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 注文明細を作成
+    // メニューアイテム情報を先に取得
+    const { data: menuItems } = await supabase
+      .from("menu_items")
+      .select("id, name")
+      .in(
+        "id",
+        items.map((i) => i.menuItemId)
+      );
+
+    const menuItemMap = new Map(menuItems?.map((m) => [m.id, m.name]) || []);
+
+    // 注文明細を作成（menu_item_nameを含める）
     const orderItems = items.map((item) => ({
       order_id: order.id,
       menu_item_id: item.menuItemId,
+      menu_item_name: menuItemMap.get(item.menuItemId) || "商品",
       quantity: item.quantity,
       unit_price: item.unitPrice,
       options: item.options,
@@ -128,17 +140,6 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
-
-    // メニューアイテム情報を取得
-    const { data: menuItems } = await supabase
-      .from("menu_items")
-      .select("id, name")
-      .in(
-        "id",
-        items.map((i) => i.menuItemId)
-      );
-
-    const menuItemMap = new Map(menuItems?.map((m) => [m.id, m.name]) || []);
 
     // Stripe Checkout Sessionを作成
     const lineItems = items.map((item) => {
