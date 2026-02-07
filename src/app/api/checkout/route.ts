@@ -25,6 +25,23 @@ interface CheckoutRequest {
 
 export async function POST(request: NextRequest) {
   try {
+    // 環境変数チェック
+    if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      console.error("SUPABASE_SERVICE_ROLE_KEY is not set");
+      return NextResponse.json(
+        { error: "サーバー設定エラー: DB接続キーが未設定です" },
+        { status: 500 }
+      );
+    }
+
+    if (!process.env.STRIPE_SECRET_KEY) {
+      console.error("STRIPE_SECRET_KEY is not set");
+      return NextResponse.json(
+        { error: "サーバー設定エラー: 決済キーが未設定です" },
+        { status: 500 }
+      );
+    }
+
     const body: CheckoutRequest = await request.json();
     const {
       items,
@@ -83,7 +100,7 @@ export async function POST(request: NextRequest) {
     if (orderError || !order) {
       console.error("Order creation error:", orderError);
       return NextResponse.json(
-        { error: "注文の作成に失敗しました" },
+        { error: `注文の作成に失敗しました: ${orderError?.message || "不明なエラー"}` },
         { status: 500 }
       );
     }
